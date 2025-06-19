@@ -13,14 +13,14 @@ def benchmark_function(module_name, function_name, output_file, *args, **kwargs)
     module = importlib.import_module(module_name)
     func = getattr(module, function_name)
 
-    print("Warming up...", end="")
+    print("Warming up...", end="", flush=True)
     for i in range(WARMUPS):
-        print(f" {WARMUPS - i}...", end="")
+        print(f" {WARMUPS - i}...", end="", flush=True)
         func(*args, **kwargs)
-    print(" done.")
+    print(" done.", flush=True)
 
     # Benchmark
-    print("Running benchmark...")
+    print("Running benchmark...", flush=True)
     start = time.perf_counter()
     result = func(*args, **kwargs)
     end = time.perf_counter()

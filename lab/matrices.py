@@ -4,7 +4,7 @@ _COLS = 3000
 _ROWS = 3000
 
 # Create a large square matrix using native Python lists
-print("Creating matrix...", end="")
+print("Creating matrix...", end="", flush=True)
 MATRIX = [[randint(0, 100) for _ in range(_ROWS)] for _ in range(_COLS)]
 print(" done.")
 
