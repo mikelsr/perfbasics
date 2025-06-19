@@ -1,0 +1,8 @@
+# Profiling
+snakeviz
+
+# Benchmarking
+matplotlib
+pathlib
+rich
+seaborn
