@@ -1,7 +1,7 @@
 import numpy as np
 
-_COLS = 10000
-_ROWS = 10000
+_COLS = 3000
+_ROWS = 3000
 
 # Create a large matrix using NumPy
 print("Creating matrix...", end="", flush=True)
