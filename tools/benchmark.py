@@ -5,7 +5,7 @@ import argparse
 from pathlib import Path
 
 
-WARMUPS = 3
+WARMUPS = 3  # It's better to have more iterations but we're short in time.
 
 
 def benchmark_function(module_name, function_name, output_file, *args, **kwargs):
@@ -14,7 +14,7 @@ def benchmark_function(module_name, function_name, output_file, *args, **kwargs)
     func = getattr(module, function_name)
 
     print("Warming up...", end="")
-    for i in range(WARMUPS):  # It is recommended to increase the number of iterations.
+    for i in range(WARMUPS):
         print(f" {WARMUPS - i}...", end="")
         func(*args, **kwargs)
     print(" done.")
