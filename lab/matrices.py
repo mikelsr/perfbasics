@@ -23,7 +23,7 @@ def iterate_by_row():
 def iterate_by_column():
     total = 0
     size = len(MATRIX)
-    for col in range(size):
-        for row in range(size):
-            total += MATRIX[row][col]
+    for row in range(size):
+        for col in range(size):
+            total += MATRIX[col][row]
     return total
