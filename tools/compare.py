@@ -44,16 +44,13 @@ def print_table(results):
     console.print(table)
 
 
-# This function is not used, but I've kept it in case someone has issues with seaborn.
-
-
 def plot_results(results, save_path=None):
     sns.set_theme(style="whitegrid")  # clean seaborn theme
 
     labels = [r["file"] for r in results]
     times = [r["execution_time_seconds"] for r in results]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    _, ax = plt.subplots(figsize=(10, 6))
     bar_colors = sns.color_palette("pastel", len(results))
     bars = ax.bar(labels, times, color=bar_colors, edgecolor="black", linewidth=0.6)
 
