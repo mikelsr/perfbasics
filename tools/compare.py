@@ -9,6 +9,10 @@ from rich.console import Console
 from rich.table import Table
 
 
+FONT_SIZE = 14
+LABEL_SIZE = 12
+
+
 def load_results(file_paths):
     results = []
     for path in file_paths:
@@ -55,9 +59,13 @@ def plot_results(results, save_path=None):
     bars = ax.bar(labels, times, color=bar_colors, edgecolor="black", linewidth=0.6)
 
     # Y-axis formatting
-    ax.set_ylabel("Execution Time (s)", fontsize=12)
-    ax.set_title("Benchmark Execution Time Comparison", fontsize=14, pad=15)
+    ax.set_ylabel("Execution Time (s)", fontsize=FONT_SIZE)
+    ax.set_title("Benchmark Execution Time Comparison", fontsize=FONT_SIZE, pad=15)
     ax.set_ylim(0, max(times) * 1.2)  # Add some headroom
+
+    # Configure tick label font sizes
+    ax.tick_params(axis="x", labelsize=LABEL_SIZE)
+    ax.tick_params(axis="y", labelsize=FONT_SIZE)
 
     # Gridlines
     ax.yaxis.grid(True, linestyle="--", linewidth=0.5)
@@ -71,7 +79,7 @@ def plot_results(results, save_path=None):
             f"{height:.3f}s\n({r['percent_diff']:+.1f}%)",
             ha="center",
             va="bottom",
-            fontsize=9,
+            fontsize=FONT_SIZE,
             color="black",
         )
 
