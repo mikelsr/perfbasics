@@ -1,7 +1,7 @@
 from random import randint
 
-_COLS = 3000
-_ROWS = 3000
+_COLS = 10000
+_ROWS = 10000
 
 # Create a large square matrix using native Python lists
 print("Creating matrix...", end="", flush=True)
