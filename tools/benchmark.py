@@ -2,7 +2,6 @@ import importlib
 import time
 import json
 import argparse
-from pathlib import Path
 
 
 WARMUPS = 3  # It's better to have more iterations but we're short in time.

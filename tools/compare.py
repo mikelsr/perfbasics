@@ -1,8 +1,7 @@
 import json
 import argparse
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import seaborn as sns
+import seaborn
 
 from pathlib import Path
 from rich.console import Console
@@ -49,13 +48,13 @@ def print_table(results):
 
 
 def plot_results(results, save_path=None):
-    sns.set_theme(style="whitegrid")  # clean seaborn theme
+    seaborn.set_theme(style="whitegrid")  # clean seaborn theme
 
     labels = [r["file"] for r in results]
     times = [r["execution_time_seconds"] for r in results]
 
     _, ax = plt.subplots(figsize=(10, 6))
-    bar_colors = sns.color_palette("pastel", len(results))
+    bar_colors = seaborn.color_palette("pastel", len(results))
     bars = ax.bar(labels, times, color=bar_colors, edgecolor="black", linewidth=0.6)
 
     # Y-axis formatting

@@ -28,5 +28,6 @@ def iterate_by_column():
             total += MATRIX[col][row]
     return total
 
+
 def matrix_sum():
     return sum(sum(row) for row in MATRIX)
