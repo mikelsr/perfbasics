@@ -46,8 +46,46 @@ It will show a table in the terminal as well as opening a graph comparing the re
 
 ## Profiling
 
-TODO mikel
+Generate a profile file by running the script with:
 
-## Exercises
+```shell
+python -m cProfile -o out/<name>.prof <program>.py
+```
 
-TODO mikel
+Where:
+- `<name>` is the name of the profile file to be generated.
+- `<program>` is the name of the program to profile.
+
+For example:
+
+```shell
+python -m cProfile -o out/from_file.prof lab/matrices_io.py --source=file --path=data/matrix_3000.txt
+```
+
+Then open the profile analyzer with:
+
+```shell
+snakeviz out/<name>.prof
+```
+
+For example:
+
+```shell
+snakeviz out/from_file.prof
+```
+
+## Lab
+
+Let's try and make the `lab/wordcount.py` file more efficient. It's a program that counts how many times each word appears in some text.
+
+The code is really slow and obtuse. Don't try to understand the algorithm within each function. Instead, profile the file to see which ones are the slowest, understand the input they receive and the output they produce, and find simpler and faster ways of doing the same. You can profile and benchmark it with:
+
+```
+python -m cProfile -o out/from_file.prof lab/matrices_io.py --source=file --path=data/matrix_3000.txt
+```
+
+and
+
+```shell
+python3 -m tools.benchmark lab.wordcount count_words out/wordcount.json
+```
