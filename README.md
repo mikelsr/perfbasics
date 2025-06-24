@@ -39,7 +39,7 @@ python3 -m tools.benchmark lab.matrices iterate_by_column out/column.json
 Then compare the results with
 
 ```shell
-python3 -m tools.compare row.json column.json
+python3 -m tools.compare out/row.json out/column.json
 ```
 
 It will show a table in the terminal as well as opening a graph comparing the results.
@@ -49,7 +49,7 @@ It will show a table in the terminal as well as opening a graph comparing the re
 Generate a profile file by running the script with:
 
 ```shell
-python -m cProfile -o out/<name>.prof <program>.py
+python3 -m cProfile -o out/<name>.prof <program>.py
 ```
 
 Where:
@@ -59,7 +59,7 @@ Where:
 For example:
 
 ```shell
-python -m cProfile -o out/from_file.prof lab/matrices_io.py --source=file --path=data/matrix_3000.txt
+python3 -m cProfile -o out/from_file.prof lab/matrices_io.py --source=file --path=data/matrix_3000.txt
 ```
 
 Then open the profile analyzer with:
@@ -81,11 +81,11 @@ Let's try and make the `lab/wordcount.py` file more efficient. It's a program th
 The code is really slow and obtuse. Don't try to understand the algorithm within each function. Instead, profile the file to see which ones are the slowest, understand the input they receive and the output they produce, and find simpler and faster ways of doing the same. You can profile and benchmark it with:
 
 ```
-python -m cProfile -o out/from_file.prof lab/matrices_io.py --source=file --path=data/matrix_3000.txt
+python3 -m cProfile -o out/wordcount.prof lab/wordcount.py
 ```
 
 and
 
 ```shell
-python3 -m tools.benchmark lab.wordcount count_words out/wordcount.json
+python3 -m tools.benchmark lab.wordcount main out/wordcount.json
 ```
