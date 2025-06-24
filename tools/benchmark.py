@@ -5,6 +5,7 @@ import argparse
 
 
 WARMUPS = 3  # It's better to have more iterations but we're short in time.
+RUNS = 3 # Same thing.
 
 
 def benchmark_function(module_name, function_name, output_file, *args, **kwargs):
@@ -20,19 +21,22 @@ def benchmark_function(module_name, function_name, output_file, *args, **kwargs)
 
     # Benchmark
     print("Running benchmark...", flush=True)
-    start = time.perf_counter()
-    result = func(*args, **kwargs)
-    end = time.perf_counter()
-    duration = end - start
+    total_duration = 0
+    for _ in range(RUNS):
+        start = time.perf_counter()
+        _ = func(*args, **kwargs)
+        end = time.perf_counter()
+        duration = end - start
+        total_duration += duration
+    total_duration /= RUNS
 
     # Save result
-    data = {"module": module_name, "function": function_name, "execution_time_seconds": duration}
+    data = {"module": module_name, "function": function_name, "execution_time_seconds": total_duration}
     with open(output_file, "w") as f:
         json.dump(data, f, indent=2)
 
-    print(f"Benchmarked {module_name}.{function_name} in {duration:.6f} seconds.")
-    return result
-
+    print(f"Benchmarked {module_name}.{function_name} in {total_duration:.6f} seconds.")
+    return
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Benchmark a function and save result.")
