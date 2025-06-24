@@ -20,7 +20,7 @@ def slow_lower(text):
     return "".join([char.lower() for char in text])
 
 
-def tokenize(text):
+def separate_by_spaces(text):
     """Splits text into words manually, scanning character by character."""
     words = []
     current_word = []
@@ -92,7 +92,7 @@ def main():
     for filename in file_list:
         print(f"Processing {filename}...")
         text = read_file(filename)
-        words = tokenize(text)
+        words = separate_by_spaces(text)
         counts = count_words(words)
         all_counts.append(counts)
 
