@@ -21,3 +21,9 @@ def without_gc():
         return make_objects()
     finally:
         gc.enable()
+
+def toggle_gc():
+    try:
+        gc.disable()
+    finally:
+        gc.enable()
