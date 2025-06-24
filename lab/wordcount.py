@@ -15,16 +15,11 @@ def read_file(filename):
     return "".join(content)
 
 
-def slow_lower(text):
-    """Converts text to lowercase one character at a time."""
-    return "".join([char.lower() for char in text])
-
-
 def separate_by_spaces(text):
     """Splits text into words manually, scanning character by character."""
     words = []
     current_word = []
-    for char in slow_lower(text):
+    for char in text.lower():
         if char.isspace():
             if current_word:
                 words.append("".join(current_word))
@@ -37,34 +32,40 @@ def separate_by_spaces(text):
 
 
 def count_words(words):
-    """Counts the frequency of each word with an extra validation pass."""
-    # Fake validation loop
-    for word in words:
-        pass  # placeholder for "validation"
-
-    word_counts = {}
-    for word in words:
-        if word in word_counts:
-            word_counts[word] += 1
-        else:
-            word_counts[word] = 1
+    """Counts the frequency of each word.
+    It outputs a list of pairs [(word, count)], e.g. [('hello', 3), ('world', 8)]."""
+    word_counts = []
+    for new_word in words:
+        found = False
+        for i in range(len(word_counts)):
+            word, count = word_counts[i]
+            if word == new_word:
+                found = True
+                word_counts[i] = (word, count + 1)
+                break
+        if not found:
+            word_counts.append((new_word, 1))
     return word_counts
 
 
 def merge_counts(counts_list):
-    """Merges word counts using an inefficient list-based approach."""
-    merged = []
+    """Merges word counts.
+    It receives [('a', 1), ('b', 2)], [('b', 1), ('c', 1)] and outputs [('a', 1), ('b', 3), ('c', 1)].
+    """
+    total_counts = []
     for counts in counts_list:
-        for word, count in counts.items():
+        for i in range(len(counts)):
             found = False
-            for i, (w, c) in enumerate(merged):
-                if w == word:
-                    merged[i] = (w, c + count)
+            new_word, new_count = counts[i]
+            for j in range(len(total_counts)):
+                word, count = total_counts[j]
+                if word == new_word:
                     found = True
+                    total_counts[j] = (word, count + new_count)
                     break
             if not found:
-                merged.append((word, count))
-    return dict(merged)
+                total_counts.append((new_word, new_count))
+    return total_counts
 
 
 def slow_sort(word_count_items):
@@ -90,14 +91,15 @@ def main():
     all_counts = []
 
     for filename in file_list:
-        print(f"Processing {filename}...")
+        print(f"Counting words in {filename}...")
         text = read_file(filename)
         words = separate_by_spaces(text)
         counts = count_words(words)
         all_counts.append(counts)
 
+    print("Merging counts...")
     total_counts = merge_counts(all_counts)
-    sorted_counts = slow_sort(list(total_counts.items()))
+    sorted_counts = slow_sort(list(total_counts))
 
     print("\nTop 10 most common words:")
     for word, count in sorted_counts[:10]:
