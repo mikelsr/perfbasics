@@ -1,6 +1,10 @@
 # perfbasics
 Materials for my "Writing Faster Code: Profiling and Performance Basics" talk in 0xDeusto, 2025-06-24.
 
+## Slides
+
+The slides used for the talk are in the [slides.pdf](https://github.com/mikelsr/perfbasics/blob/main/slides.pdf) file.
+
 ## Setup
 
 I recommend using virtual environments if possible, but it's not compulsory.
