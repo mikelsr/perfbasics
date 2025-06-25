@@ -78,6 +78,13 @@ For example:
 snakeviz out/from_file.prof
 ```
 
+Try doing the same but telling the script to load the files from the web instead of
+local storage, and see how the profile changes!
+
+```shell
+python3 -m cProfile -o out/from_file.prof lab/matrices_io.py --source=web --path=matrix_3000.txt
+```
+
 ## Lab
 
 Let's try and make the `lab/wordcount.py` file more efficient. It's a program that counts how many times each word appears in some text.
